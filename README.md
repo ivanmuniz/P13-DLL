@@ -20,4 +20,4 @@ To make DLL:
 First:  
 gcc -c P13.cpp  
 Second:  
-gcc -shared -o prueba.dll -Wl,--out-implib,libtstdll.a P13.o
+gcc -shared -o P13.dll -Wl,--out-implib,libtstdll.a P13.o
