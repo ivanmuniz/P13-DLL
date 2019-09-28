@@ -6,7 +6,7 @@ int asciiBinaryToInt(char* s);
 int asciiHEXToInt(char* s);  
 int asciiOCTToInt(char* s);  
   
-All the function receive a pointer of type char that captures a string of 9 digits.  
+All the functions receive a pointer of type char that captures a string of 9 digits.  
 If the function returns -1 there was a problem converting the char stream. This is mostly because the program found an invalid character that cannot be converted.  
 Else it returns an integer with the value of the conversion.  
   
