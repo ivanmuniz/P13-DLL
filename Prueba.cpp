@@ -1,9 +1,6 @@
 // Prueba.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //
 
-// #include "pch.h" Uncomment for Visual Studio 2017 and earlier
-#include <iostream>
-#include "P13.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,57 +9,68 @@
 #include <stdbool.h>
 #include <Windows.h>
 
+/*
+HMODULE LoadLibraryA(
+	LPCSTR P13
+);
+*/
+
 int main()
 {
+	HINSTANCE P13;
+	typedef int (asciiBinaryToInt)(char*);
+	typedef int (asciiHexToInt)(char*);
+	typedef int (asciiOctToInt)(char*);
+	asciiBinaryToInt* ptrFuncBinToInt = 0;
+	asciiHexToInt* ptrFuncHexToInt = 0;
+	asciiOctToInt* ptrFuncOctToInt = 0;
 	char* s = NULL;
 	int iBinToInt = 0;
 	int iHexToInt = 0;
 	int iOctToInt = 0;
-
-
-	s = (char*)malloc(sizeof(char) * 9);
-	printf("Ingrese el numero hexadecimal que desea convertir a decimal: ");
-	scanf("%s", s);
-	s[8] = '\0';
-	iHexToInt = asciiHEXToInt(s);
-	if (iHexToInt != -1) {
-		printf("El numero decimal para %s es: %d\n", s, iHexToInt);
+	if (P13 = LoadLibrary("P13.dll")) {
+		if (ptrFuncBinToInt = (asciiBinaryToInt*) GetProcAddress(P13, "asciiBinaryToInt")) {
+			s = (char*)malloc(sizeof(char) * 9);
+			printf("Ingrese el numero binario que desea convertir a decimal: ");
+			scanf("%s", s);
+			s[8] = '\0';
+			iBinToInt = (*ptrFuncBinToInt)(s);
+			printf("%d\n", iBinToInt);
+			free(s);
+		}
+		else {
+			printf("Error: Routine BIN not found.\n");
+		}
+		if (ptrFuncHexToInt = (asciiHexToInt*) GetProcAddress(P13, "asciiHEXToInt")) {
+			s = (char*)malloc(sizeof(char) * 9);
+			printf("Ingrese el numero hexadecimal que desea convertir a decimal: ");
+			scanf("%s", s);
+			s[8] = '\0';
+			iHexToInt = (*ptrFuncHexToInt)(s);
+			printf("%d\n", iHexToInt);
+			free(s);
+		}
+		else {
+			printf("Error: Routine HEX not found.\n");
+		}
+		if (ptrFuncOctToInt = (asciiOctToInt*)GetProcAddress(P13, "asciiOCTToInt")) {
+			s = (char*)malloc(sizeof(char) * 9);
+			printf("Ingrese el numero octal que desea convertir a decimal: ");
+			scanf("%s", s);
+			s[8] = '\0';
+			iOctToInt = (*ptrFuncOctToInt)(s);
+			printf("%d\n", iOctToInt);
+			free(s);
+		}
+		else {
+			printf("Error: Routine HEX not found.\n");
+		}
 	}
-	free(s);
-
-
-	s = (char*)malloc(sizeof(char) * 9);
-	printf("Ingrese el numero binario que desea convertir a decimal: ");
-	scanf("%s", s);
-	s[8] = '\0';
-	iBinToInt = asciiBinaryToInt(s);
-	if(iBinToInt != -1) {
-		printf("El numero decimal para %s es: %d\n", s, iBinToInt);
+	else {
+		printf("Error: Library not found.\n");
 	}
-	free(s);
-
-	s = (char*)malloc(sizeof(char) * 9);
-	printf("Ingrese el numero octal que desea convertir a decimal: ");
-	scanf("%s", s);
-	s[8] = '\0';
-	iOctToInt = asciiOCTToInt(s);
-	if (iOctToInt != -1) {
-		printf("El numero decimal para %s es: %d\n", s, iOctToInt);
-	}
-	free(s);
-
-	printf("Teclee enter para cerrar la terminal.");
+	FreeLibrary(P13);
 	getchar();
 	getchar();
 	return 0;
 }
-
-// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
-// Depurar programa: F5 o menú Depurar > Iniciar depuración
-
-// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
-//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
-//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
-//   4. Use la ventana Lista de errores para ver los errores
-//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
-//   6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln
